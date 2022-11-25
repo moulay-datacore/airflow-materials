@@ -1,3 +1,4 @@
+from datetime import datetime
 import pytest
 import collections
 import pendulum
@@ -48,7 +49,10 @@ class TestTstDagDefinition:
         """
             Verify that the start_date is < current date and catchup = False
         """
-        True
+        start_date = dag.default_args['start_date']
+        current_date = datetime.date(datetime.now())
+        catchup = dag.catchup
+        assert start_date < current_date and catchup == False
 
     def test_same_start_date_all_tasks(self, dag):
         """

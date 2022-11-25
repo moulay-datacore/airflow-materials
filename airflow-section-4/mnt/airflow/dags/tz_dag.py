@@ -8,11 +8,14 @@ from datetime import timedelta, datetime
 local_tz = pendulum.timezone("Europe/Paris")
 
 default_args = {
-    'start_date': datetime(2019, 3, 29, 1),
-    'owner': 'Airflow'
+    'start_date': datetime(2022, 6, 4, 19, tzinfo=local_tz),
+    'owner': 'Airflow',
+    'email': 'owner@test.com',
+    'retries': 3,
+    'retry_delay': timedelta(minutes=5),
 }
 
-with DAG(dag_id='tz_dag', schedule_interval="0 1 * * *", default_args=default_args) as dag:
+with DAG(dag_id='tz_dag', schedule_interval="0 19 * * *", default_args=default_args) as dag:
     dummy_task = DummyOperator(task_id='dummy_task')
     
     run_dates = dag.get_run_dates(start_date=dag.start_date)
