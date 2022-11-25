@@ -5,13 +5,10 @@ from datetime import datetime, timedelta
 
 default_args = {
     'start_date': datetime(2022, 5, 25),
-    'owner': 'Airflow',
-    'email': 'owner@test.com',
-    'retries': 3,
-    'retry_delay': timedelta(minutes=5),
+    'owner': 'Airflow'
 }
 
-with DAG(dag_id='backfill', schedule_interval="0 0 * * *", default_args=default_args, catchup=True) as dag:
+with DAG(dag_id='backfill_a', schedule_interval="0 0 * * *", default_args=default_args, catchup=True) as dag:
     
     # Task 1
     bash_task_1 = BashOperator(task_id='bash_task_1', bash_command="echo 'first task'")

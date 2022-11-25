@@ -5,7 +5,10 @@ from datetime import datetime, timedelta
 
 default_args = {
     'start_date': datetime(2022, 5, 29, 20),
-    'owner': 'Airflow'
+    'owner': 'Airflow',
+    'email': 'owner@test.com',
+    'retries': 3,
+    'retry_delay': timedelta(minutes=5),
 }
 
 with DAG(dag_id='start_and_schedule_dag', schedule_interval="0 * * * *", default_args=default_args) as dag:
